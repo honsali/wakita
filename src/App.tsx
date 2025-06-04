@@ -47,7 +47,13 @@ function App() {
       {!error && !sunTimes && <p>Obtaining location&hellip;</p>}
       {sunTimes && (
         <>
-          <SolarWatch solarNoon={sunTimes.solarNoon} />
+          <SolarWatch
+            dawn={sunTimes.dawn}
+            sunrise={sunTimes.sunrise}
+            solarNoon={sunTimes.solarNoon}
+            sunset={sunTimes.sunset}
+            dusk={sunTimes.dusk}
+          />
           <table className="sun-table" style={{ margin: '0 auto' }}>
             <thead>
               <tr>
