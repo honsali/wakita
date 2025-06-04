@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import SunCalc from 'suncalc';
+import SolarWatch from './SolarWatch';
 
 interface SunTimes {
   dawn: Date;
@@ -45,13 +46,15 @@ function App() {
       {error && <p>{error}</p>}
       {!error && !sunTimes && <p>Obtaining location&hellip;</p>}
       {sunTimes && (
-        <table className="sun-table" style={{ margin: '0 auto' }}>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Time</th>
-            </tr>
-          </thead>
+        <>
+          <SolarWatch solarNoon={sunTimes.solarNoon} />
+          <table className="sun-table" style={{ margin: '0 auto' }}>
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Time</th>
+              </tr>
+            </thead>
           <tbody>
             <tr>
               <td>Dawn</td>
@@ -75,6 +78,7 @@ function App() {
             </tr>
           </tbody>
         </table>
+        </>
       )}
     </div>
   );
