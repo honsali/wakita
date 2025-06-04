@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import SunCalc from 'suncalc';
 import SolarWatch from './SolarWatch';
+import SunTimesTable from './SunTimesTable';
 
 interface SunTimes {
   dawn: Date;
@@ -37,9 +38,6 @@ function App() {
     );
   }, []);
 
-  const formatTime = (date: Date) =>
-    date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
   return (
     <div className="App">
       <h1 className="title">wakita</h1>
@@ -47,29 +45,13 @@ function App() {
       {!error && !sunTimes && <p>Obtaining location&hellip;</p>}
       {sunTimes && (
         <>
-          <table
-            className="sun-table"
-            style={{ margin: '0 auto', marginBottom: '20px' }}
-          >
-            <thead>
-              <tr>
-                <th>Dawn</th>
-                <th>Sunrise</th>
-                <th>Solar Noon</th>
-                <th>Sunset</th>
-                <th>Dusk</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{formatTime(sunTimes.dawn)}</td>
-                <td>{formatTime(sunTimes.sunrise)}</td>
-                <td>{formatTime(sunTimes.solarNoon)}</td>
-                <td>{formatTime(sunTimes.sunset)}</td>
-                <td>{formatTime(sunTimes.dusk)}</td>
-              </tr>
-            </tbody>
-          </table>
+          <SunTimesTable
+            dawn={sunTimes.dawn}
+            sunrise={sunTimes.sunrise}
+            solarNoon={sunTimes.solarNoon}
+            sunset={sunTimes.sunset}
+            dusk={sunTimes.dusk}
+          />
           <SolarWatch
             dawn={sunTimes.dawn}
             sunrise={sunTimes.sunrise}
