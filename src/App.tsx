@@ -47,6 +47,29 @@ function App() {
       {!error && !sunTimes && <p>Obtaining location&hellip;</p>}
       {sunTimes && (
         <>
+          <table
+            className="sun-table"
+            style={{ margin: '0 auto', marginBottom: '20px' }}
+          >
+            <thead>
+              <tr>
+                <th>Dawn</th>
+                <th>Sunrise</th>
+                <th>Solar Noon</th>
+                <th>Sunset</th>
+                <th>Dusk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{formatTime(sunTimes.dawn)}</td>
+                <td>{formatTime(sunTimes.sunrise)}</td>
+                <td>{formatTime(sunTimes.solarNoon)}</td>
+                <td>{formatTime(sunTimes.sunset)}</td>
+                <td>{formatTime(sunTimes.dusk)}</td>
+              </tr>
+            </tbody>
+          </table>
           <SolarWatch
             dawn={sunTimes.dawn}
             sunrise={sunTimes.sunrise}
@@ -54,36 +77,6 @@ function App() {
             sunset={sunTimes.sunset}
             dusk={sunTimes.dusk}
           />
-          <table className="sun-table" style={{ margin: '0 auto' }}>
-            <thead>
-              <tr>
-                <th>Event</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr>
-              <td>Dawn</td>
-              <td>{formatTime(sunTimes.dawn)}</td>
-            </tr>
-            <tr>
-              <td>Sunrise</td>
-              <td>{formatTime(sunTimes.sunrise)}</td>
-            </tr>
-            <tr>
-              <td>Solar Noon</td>
-              <td>{formatTime(sunTimes.solarNoon)}</td>
-            </tr>
-            <tr>
-              <td>Sunset</td>
-              <td>{formatTime(sunTimes.sunset)}</td>
-            </tr>
-            <tr>
-              <td>Dusk</td>
-              <td>{formatTime(sunTimes.dusk)}</td>
-            </tr>
-          </tbody>
-        </table>
         </>
       )}
     </div>
