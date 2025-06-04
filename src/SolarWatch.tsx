@@ -9,7 +9,7 @@ interface Props {
 }
 
 const RADIUS = 80;
-const STROKE = 10;
+const STROKE = 20;
 const CIRC = 2 * Math.PI * RADIUS;
 const LABEL_RADIUS = RADIUS + STROKE + 12;
 
@@ -49,6 +49,15 @@ function SolarWatch({ dawn, sunrise, solarNoon, sunset, dusk }: Props) {
 
   return (
     <svg width={(RADIUS + STROKE) * 2} height={(RADIUS + STROKE) * 2}>
+      <defs>
+        <linearGradient id="skyGradient" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="pink" />
+          <stop offset="25%" stopColor="lightblue" />
+          <stop offset="50%" stopColor="orange" />
+          <stop offset="75%" stopColor="darkblue" />
+          <stop offset="100%" stopColor="pink" />
+        </linearGradient>
+      </defs>
       <g transform={`translate(${RADIUS + STROKE}, ${RADIUS + STROKE})`}>
         <circle
           r={RADIUS}
@@ -59,7 +68,7 @@ function SolarWatch({ dawn, sunrise, solarNoon, sunset, dusk }: Props) {
         <circle
           r={RADIUS}
           fill="none"
-          stroke="#00f"
+          stroke="url(#skyGradient)"
           strokeWidth={STROKE}
           strokeDasharray={CIRC}
           strokeDashoffset={dashOffset}
