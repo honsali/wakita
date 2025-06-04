@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 
 interface Props {
+  dawn: Date;
+  sunrise: Date;
   solarNoon: Date;
+  sunset: Date;
+  dusk: Date;
 }
 
 const RADIUS = 80;
 const STROKE = 10;
 const CIRC = 2 * Math.PI * RADIUS;
+const LABEL_RADIUS = RADIUS + STROKE + 12;
 
-function SolarWatch({ solarNoon }: Props) {
+function SolarWatch({ dawn, sunrise, solarNoon, sunset, dusk }: Props) {
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
@@ -25,6 +30,18 @@ function SolarWatch({ solarNoon }: Props) {
   // 12:00 should match solar noon
   const offset = 720 - noonMinutes; // minutes to add to local time
   const solarMinutes = (nowMinutes + offset + 1440) % 1440; // wrap around 24h
+
+  const angleFor = (date: Date) => {
+    const m = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
+    const sm = (m + offset + 1440) % 1440;
+    return (sm / 720) * 360;
+  };
+
+  const dawnAngle = angleFor(dawn);
+  const sunriseAngle = angleFor(sunrise);
+  const noonAngle = angleFor(solarNoon);
+  const sunsetAngle = angleFor(sunset);
+  const duskAngle = angleFor(dusk);
 
   const ratio = solarMinutes / 720; // position on 12-hour dial
   const angle = ratio * 360;
@@ -57,6 +74,29 @@ function SolarWatch({ solarNoon }: Props) {
           strokeWidth="2"
           transform={`rotate(${angle})`}
         />
+        {[
+          { label: 'Dawn', angle: dawnAngle },
+          { label: 'Sunrise', angle: sunriseAngle },
+          { label: 'Noon', angle: noonAngle },
+          { label: 'Sunset', angle: sunsetAngle },
+          { label: 'Dusk', angle: duskAngle },
+        ].map(({ label, angle: a }) => {
+          const rad = ((a - 90) * Math.PI) / 180;
+          const x = LABEL_RADIUS * Math.cos(rad);
+          const y = LABEL_RADIUS * Math.sin(rad);
+          return (
+            <text
+              key={label}
+              x={x}
+              y={y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              style={{ fontSize: '10px' }}
+            >
+              {label}
+            </text>
+          );
+        })}
       </g>
     </svg>
   );
