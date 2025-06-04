@@ -9,3 +9,21 @@ body {
 .title {
   color: red;
 }
+
+.sun-table {
+  border-collapse: collapse;
+}
+
+.sun-table th,
+.sun-table td {
+  border: 1px solid #fff;
+  padding: 4px 8px;
+}
+
+.sun-table thead tr {
+  background-color: #d3d3d3;
+}
+
+.sun-table tbody tr {
+  background-color: #f2f2f2;
+}
