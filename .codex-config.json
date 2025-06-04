@@ -1,0 +1,28 @@
+{
+    "projectType": "react",
+    "language": "typescript",
+    "packageManager": "npm",
+    "dependencies": [
+        "suncalc",
+        "react",
+        "react-dom",
+        "typescript"
+    ],
+    "devDependencies": [
+        "@types/react",
+        "@types/react-dom",
+        "@types/node",
+        "react-scripts"
+    ],
+    "initCommands": [
+        "npx create-react-app . --template typescript"
+    ],
+    "git": {
+        "init": true,
+        "remote": "https://github.com/honsali/wakita",
+        "branch": "main",
+        "autoCommit": true,
+        "autoPush": true,
+        "commitMessage": "Initial commit: React TS + SunCalc"
+    }
+}
